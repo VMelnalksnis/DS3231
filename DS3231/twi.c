@@ -33,7 +33,7 @@ uint8_t TWI_get_state_info(void)
 	return TWI_state.errorState;
 }
 
-void TWI_master_initialise(void)
+void TWI_master_initialize(void)
 {
 	PORT_TWI |= (1 << PIN_TWI_SDA);					// Enable pullup on SDA, to set high as released state
 	PORT_TWI |= (1 << PIN_TWI_SCL);					// Enable pullup on SCL, to set high as released state

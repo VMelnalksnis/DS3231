@@ -4,7 +4,7 @@
 // Defines controlling timing limits
 #define TWI_FAST_MODE					//!< Must be defined for clock speeds [100;400] kHz.
 
-#define SYS_CLK 4000					//!< TWI clock speed in kHz.
+#define SYS_CLK 4000.0					//!< TWI clock speed in kHz.
  
 #ifdef TWI_FAST_MODE								// TWI FAST mode timing limits. SCL = 100-400kHz
 	#define T2_TWI ((SYS_CLK * 1300) / 1000000) + 1	// >1.3us
