@@ -1,3 +1,4 @@
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -43,3 +44,8 @@ $RECYCLE.BIN/
 
 #User Specific Files
 *.atsuo
+*.atsln
+
+#Misc
+*.componentinfo.xml
+*.cproj
