@@ -1,11 +1,38 @@
-/**
- * 
+/*
+MIT License
+
+Copyright (c) 2017 Valters Melnalksnis
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+/**@file twi.h
+ * @author Valters Melnalksnis
+ * @date 4 Jan 2017
+ * @brief File containing definitions and prototypes for TWI
+ *
  */
 // Defines controlling timing limits
 #define TWI_FAST_MODE					//!< Must be defined for clock speeds [100;400] kHz.
 
 #define SYS_CLK 4000.0					//!< TWI clock speed in kHz.
- 
+
 #ifdef TWI_FAST_MODE								// TWI FAST mode timing limits. SCL = 100-400kHz
 	#define T2_TWI ((SYS_CLK * 1300) / 1000000) + 1	// >1.3us
 	#define T4_TWI ((SYS_CLK * 600) / 1000000) + 1	// >0.6us
@@ -15,9 +42,9 @@
 #endif
 
 // Controlling code generation definitions
-#define PARAM_VERIFICATION				//!< 
+#define PARAM_VERIFICATION				//!<
 #define NOISE_TESTING					//!<
-#define SIGNAL_VERIFY					//!<  
+#define SIGNAL_VERIFY					//!<
 
 // Bit and byte definitions
 #define TWI_READ_BIT 0					//!< Bit position for R/W bit in "address byte"
@@ -62,7 +89,7 @@
 #endif
 
 #if defined(__AVR_AT90Tiny2313__) | defined(__AVR_ATtiny2313__)
-	
+
 	#define DDR_TWI		DDRB
 	#define PORT_TWI	PORTB
 	#define PIN_TWI		PINE
@@ -71,7 +98,7 @@
 #endif
 
 /**Sets the USI module in TWI mode, and the TWI bus in idle/released mode.
- * 
+ *
  */
 void TWI_master_initialize(void);
 /**Sends or receives a byte array of defined length.
@@ -82,7 +109,7 @@ void TWI_master_initialize(void);
  */
 uint8_t TWI_start_transceiver_with_data(uint8_t *msg, uint8_t msgSize);
 /**Gets the error information about the last transmission
- * 
+ *
  * @return					Returns the error information about the last transmission.
  */
 uint8_t TWI_get_state_info(void);
