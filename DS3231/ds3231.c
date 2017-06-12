@@ -69,23 +69,23 @@ SOFTWARE.
 #include "ds3231.h"
 #include "twi.h"
 
-#define READ_ADD    0xD1	//!< The slave address of DS3231 with the LSB set to 1.
-#define WRITE_ADD   0xD0	//!< The slave address of DS3231 with the LSB set to 0.
-#define SECDR       0x00	//!< Address of the "Seconds" register.
-#define AL1DR       0X07	//!< Address of the "Alarm 1 seconds" register.
-#define AL2DR       0x0B	//!< Address of the "Alarm 2 minutes" register.
-#define CTRDR       0x0E	//!< Address of the "Control" register.
-#define STSDR       0x0F	//!< Address of the "Status" register.
-#define AGODR       0x10	//!< Address of the "Aging Offset" register.
-#define TMPDR       0x11	//!< Address of the "Temperature MSB" register.
+#define READ_ADD    0xD1                         //!< The slave address of DS3231 with the LSB set to 1.
+#define WRITE_ADD   0xD0                         //!< The slave address of DS3231 with the LSB set to 0.
+#define SECDR       0x00                         //!< Address of the "Seconds" register.
+#define AL1DR       0X07                         //!< Address of the "Alarm 1 seconds" register.
+#define AL2DR       0x0B                         //!< Address of the "Alarm 2 minutes" register.
+#define CTRDR       0x0E                         //!< Address of the "Control" register.
+#define STSDR       0x0F                         //!< Address of the "Status" register.
+#define AGODR       0x10                         //!< Address of the "Aging Offset" register.
+#define TMPDR       0x11                         //!< Address of the "Temperature MSB" register.
 
 struct time _time;
 
 /**Converts a decimal value to a binary coded decimal value.
  *
- * @param[in]	d		Decimal value to convert.
+ * @param[in]    d           Decimal value to convert.
  *
- * @return				Returns a binary coded decimal value of d.
+ * @return                   Returns a binary coded decimal value of d.
  */
 uint8_t dec2bcd(uint8_t d)
 {
@@ -94,9 +94,9 @@ uint8_t dec2bcd(uint8_t d)
 
 /**Converts a binary coded decimal value to a decimal value.
  *
- * @param[in]	d		Binary coded decimal value to convert.
+ * @param[in]    d           Binary coded decimal value to convert.
  *
- * @return				Returns a decimal value of b.
+ * @return                   Returns a decimal value of b.
  */
 uint8_t bcd2dec(uint8_t b)
 {
@@ -131,8 +131,8 @@ uint8_t ds3231_get_time(struct time* time_)
 	_time.hour = bcd2dec(msgBuf[3]);
 	_time.wday = bcd2dec(msgBuf[4]);
 	_time.mday = bcd2dec(msgBuf[5]);
-	_time.mon = bcd2dec(msgBuf[6]) & 0x1F;		// Month data is stored in Bit4..0
-	century = (msgBuf[6] & 0x80) >> 7;			// Century data is stored in Bit7
+	_time.mon = bcd2dec(msgBuf[6]) & 0x1F;       // Month data is stored in Bit4..0
+	century = (msgBuf[6] & 0x80) >> 7;           // Century data is stored in Bit7
 	_time.year = (century == 1) ? 2000 + bcd2dec(msgBuf[7]) : 1900 + bcd2dec(msgBuf[7]);
 
 	// Deal with 12-hour mode
@@ -294,12 +294,12 @@ uint8_t ds3231_SQW_enable(bool enable)
 
 	if (enable)
 	{
-		msgBuf[1] |= 0x40;		// Enable battery-backed square-wave oscillator
-		msgBuf[1] &= 0xFB;		// Disable alarm interrupts
+		msgBuf[1] |= 0x40;                       // Enable battery-backed square-wave oscillator
+		msgBuf[1] &= 0xFB;                       // Disable alarm interrupts
 	}
 	else
 	{
-		msgBuf[1] &= 0xBF;		// Disable batter-backed square=wave oscillator
+		msgBuf[1] &= 0xBF;                       // Disable batter-backed square=wave oscillator
 	}
 
 	// Write the new settings to the "Control" register
@@ -338,11 +338,11 @@ uint8_t ds3231_osc32kHz_enable(bool enable)
 
 	if (enable)
 	{
-		msgBuf[1] |= 0x08;		// Enable 32 kHz oscillator
+		msgBuf[1] |= 0x08;                       // Enable 32 kHz oscillator
 	}
 	else
 	{
-		msgBuf[1] &= 0xF7;		// Disable 32 kHz oscillator
+		msgBuf[1] &= 0xF7;                       // Disable 32 kHz oscillator
 	}
 
 	// Write the new settings to the "Status" register
@@ -455,11 +455,11 @@ uint8_t ds3231_set_alarm_s(uint8_t day, uint8_t hour, uint8_t min, uint8_t sec, 
 
 	if (intrpt == true)
 	{
-		msgBuf[1] |= 1 << alarm;		// Enable interrupt
+		msgBuf[1] |= 1 << alarm;                 // Enable interrupt
 	}
 	else
 	{
-		msgBuf[1] &= ~(1 << alarm);		// Disable interrupt
+		msgBuf[1] &= ~(1 << alarm);              // Disable interrupt
 	}
 
 	// Write the new settings to the "Control" register
@@ -535,7 +535,7 @@ uint8_t ds3231_get_alarm_s(uint8_t* day, uint8_t* hour, uint8_t* min, uint8_t* s
 		return (false);
 	}
 
-	*intrpt = (msgBuf[1] & ~(1 << alarm));		// Get the "Alarm Enabled" bit
+	*intrpt = (msgBuf[1] & ~(1 << alarm));       // Get the "Alarm Enabled" bit
 
 	// Write the address of the first register of the selected alarm
 	msgBuf[0] = WRITE_ADD;
