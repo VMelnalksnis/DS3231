@@ -28,6 +28,7 @@ SOFTWARE.
  * @brief File containing definitions and prototypes for TWI
  *
  */
+
 // Defines controlling timing limits
 #define TWI_FAST_MODE                            //!< Must be defined for clock speeds [100;400] kHz.
 

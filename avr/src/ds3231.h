@@ -50,7 +50,7 @@ SOFTWARE.
  * When setting time and alarms, 24-hour time is used.
  *
  * If you run your clock in 12-hour mode:
- * - set time hour to store in twevleHour amd set am to true or false;
+ * - set time hour to store in twelveHour and set am to true or false;
  * - call ds3231_12h_translate() (this will put the correct value in hour);
  * - call ds3231_set_alarm() or ds3231_set_time().
  *

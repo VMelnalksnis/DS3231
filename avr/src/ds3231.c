@@ -43,23 +43,23 @@ SOFTWARE.
  * - 0x0C MSB A2M3; alarm 2 hours
  * - 0x0D Bit7 A2M4; Bit6 Wday/Mday (1/0); alarm 2 day
  * - 0x0E control:
- *	- EOSC		- enable oscillator
- *	- BBSQW		- battery-backed square-wave enable
- *	- CONV		- convert temperature
- *	- NA		- not applicable
- *	- NA		- not applicable
- *	- INTCN		- interrupt control
- *	- A2IE		- alarm 2 interrupt enable
- *	- A1IE		- alarm 1 interrupt enable
+ *  - EOSC    - enable oscillator
+ *  - BBSQW   - battery-backed square-wave enable
+ *  - CONV    - convert temperature
+ *  - NA      - not applicable
+ *  - NA      - not applicable
+ *  - INTCN   - interrupt control
+ *  - A2IE    - alarm 2 interrupt enable
+ *  - A1IE    - alarm 1 interrupt enable
  * - 0x0F status:
- *	- OSF		- oscillator stop flag
- *	- 0			- unused
- *	- 0			- unused
- *	- 0			- unused
- *	- EN32KHZ	- enable 32.768 kHz output
- *	- BSY		- busy
- *	- A2F		- alarm 2 flag
- *	- A1F		- alarm 1 flag
+ *  - OSF     - oscillator stop flag
+ *  - 0       - unused
+ *  - 0       - unused
+ *  - 0       - unused
+ *  - EN32KHZ - enable 32.768 kHz output
+ *  - BSY     - busy
+ *  - A2F     - alarm 2 flag
+ *  - A1F     - alarm 1 flag
  * - 0x10 aging offset (signed)
  * - 0x11 temperature MSB (signed integer)
  * - 0x12 temperature LSB in two MSB bits (1/4 of a degree)
